@@ -4,6 +4,8 @@ Simple, secure key management for [Active Record encryption](https://edgeguides.
 
 **Note:** This project is experimental until Rails 7 is released. At the moment, encryption requires three encryption requests and one decryption request. See [this Rails issue](https://github.com/rails/rails/issues/42388) for more info. As a result, there’s no way to grant encryption and decryption permission separately.
 
+For Lockbox and attr_encrypted, check out [KMS Encrypted](https://github.com/ankane/kms_encrypted)
+
 [![Build Status](https://github.com/ankane/active_kms/workflows/build/badge.svg?branch=master)](https://github.com/ankane/active_kms/actions)
 
 ## Installation
