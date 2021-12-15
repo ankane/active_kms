@@ -1,0 +1,25 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - run: |
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt-get update
+        sudo apt-get install vault
+        vault server -dev &
+        sleep 1
+        vault secrets enable transit
+        vault write -f transit/keys/my-key
+        bundle exec rake test
+      env:
+        KEY_PROVIDER: vault
+        KEY_ID: my-key
+        VAULT_ADDR: http://127.0.0.1:8200
