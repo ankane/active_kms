@@ -132,7 +132,13 @@ Key management services allow you to rotate the master key without any code chan
 vault write -f transit/keys/my-key/rotate
 ```
 
-New data will be encrypted with the new master key version.
+New data will be encrypted with the new master key version. To encrypt existing data with new master key version, run:
+
+```ruby
+User.find_each do |user|
+  user.encrypt
+end
+```
 
 ### Switching Keys
 
