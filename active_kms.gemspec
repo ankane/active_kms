@@ -15,5 +15,5 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.6"
 
-  spec.add_dependency "activerecord", ">= 7.0.0.rc3"
+  spec.add_dependency "activerecord", ">= 7"
 end
