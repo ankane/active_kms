@@ -39,13 +39,16 @@ key_provider =
     raise "Invalid key provider"
   end
 
-ActiveRecord::Encryption.configure(
-  key_provider: key_provider,
-  # https://github.com/rails/rails/issues/42385
-  primary_key: "secret",
-  key_derivation_salt: "secret",
-  deterministic_key: nil
-)
+encryption_options = {
+  key_provider: key_provider
+}
+# https://github.com/rails/rails/issues/42385
+if ActiveRecord::VERSION::STRING.to_f < 7.1
+  encryption_options[:primary_key] = "secret"
+  encryption_options[:key_derivation_salt] = "secret"
+  encryption_options[:deterministic_key] = nil
+end
+ActiveRecord::Encryption.configure(**encryption_options)
 
 $events = Hash.new(0)
 ActiveSupport::Notifications.subscribe(/active_kms/) do |name, _start, _finish, _id, _payload|
