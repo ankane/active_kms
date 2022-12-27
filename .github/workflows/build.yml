@@ -6,30 +6,29 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - ruby: 3.1
-          gemfile: Gemfile
-        - ruby: 3.2.0-preview2
-          gemfile: gemfiles/activerecord71.gemfile
+          - ruby: 3.2
+            gemfile: gemfiles/activerecord71.gemfile
+          - ruby: 3.1
+            gemfile: Gemfile
     runs-on: ubuntu-latest
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      KEY_PROVIDER: vault
+      KEY_ID: my-key
+      VAULT_ADDR: http://127.0.0.1:8200
     steps:
-    - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - run: |
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-        sudo apt-get update
-        sudo apt-get install vault
-        vault server -dev &
-        sleep 1
-        vault secrets enable transit
-        vault write -f transit/keys/my-key
-        bundle exec rake test
-      env:
-        KEY_PROVIDER: vault
-        KEY_ID: my-key
-        VAULT_ADDR: http://127.0.0.1:8200
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update
+          sudo apt-get install vault
+          vault server -dev &
+          sleep 1
+          vault secrets enable transit
+          vault write -f transit/keys/my-key
+      - run: bundle exec rake test

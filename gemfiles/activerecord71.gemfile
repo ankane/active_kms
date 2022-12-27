@@ -8,6 +8,6 @@ gem "sqlite3"
 gem "activerecord", github: "rails/rails"
 
 gem "aws-sdk-kms"
-gem "google-cloud-kms"
+# gem "google-cloud-kms"
 gem "vault"
 gem "nokogiri" # for aws-sdk
