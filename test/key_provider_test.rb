@@ -28,7 +28,8 @@ class KeyProviderTest < Minitest::Test
     # should ideally be encrypt: 1 and no decrypt
     # https://github.com/rails/rails/issues/42388
     encrypt = ActiveRecord::VERSION::STRING.to_f >= 7.1 ? 1 : 3
-    assert_operations encrypt: encrypt, decrypt: 3 do
+    decrypt = ActiveRecord::VERSION::STRING.to_f >= 7.1 ? 4 : 3
+    assert_operations encrypt: encrypt, decrypt: decrypt do
       user.update!(email: "test2@example.org")
     end
   end
