@@ -6,6 +6,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - ruby: 3.3
+            gemfile: Gemfile
           - ruby: 3.2
             gemfile: Gemfile
           - ruby: 3.1
@@ -17,7 +19,7 @@ jobs:
       KEY_ID: my-key
       VAULT_ADDR: http://127.0.0.1:8200
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
