@@ -6,7 +6,7 @@ Simple, secure key management for [Active Record encryption](https://edgeguides.
 
 For Lockbox and attr_encrypted, check out [KMS Encrypted](https://github.com/ankane/kms_encrypted)
 
-[![Build Status](https://github.com/ankane/active_kms/workflows/build/badge.svg?branch=master)](https://github.com/ankane/active_kms/actions)
+[![Build Status](https://github.com/ankane/active_kms/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/active_kms/actions)
 
 ## Installation
 
