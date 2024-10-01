@@ -14,8 +14,8 @@ module ActiveKms
       client.encrypt(key_id: key_id, plaintext: data_key).ciphertext_blob
     end
 
-    def decrypt(_, encrypted_data_key)
-      client.decrypt(ciphertext_blob: encrypted_data_key).plaintext
+    def decrypt(key_id, encrypted_data_key)
+      client.decrypt(key_id: key_id, ciphertext_blob: encrypted_data_key).plaintext
     end
 
     # key is stored in ciphertext so don't need to store reference
