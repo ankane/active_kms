@@ -21,8 +21,14 @@ module ActiveKms
     # the same key can be referenced multiple ways
     # (key ID, key ARN, alias name, alias ARN)
     # but not a great way to account for this
+    # switching between ways will cause decryption to fail
     def prefix
       "aws"
+    end
+
+    # for versions < 0.2
+    def try_decrypt?(message_key_id)
+      super || message_key_id == "aws"
     end
   end
 end

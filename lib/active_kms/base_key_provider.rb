@@ -21,7 +21,7 @@ module ActiveKms
     end
 
     def decryption_keys(encrypted_message)
-      return [] unless key_matches?(encrypted_message.headers.encrypted_data_key_id)
+      return [] unless try_decrypt?(encrypted_message.headers.encrypted_data_key_id)
 
       encrypted_data_key = encrypted_message.headers.encrypted_data_key
       # rescue errors to try previous keys
@@ -44,9 +44,8 @@ module ActiveKms
       @key_id_header ||= "#{prefix}/#{Digest::SHA1.hexdigest(key_id).first(4)}"
     end
 
-    # versions before 0.2.0 used "aws" for key_header_id
-    def key_matches?(message_key_id)
-      message_key_id == key_id_header || (message_key_id == "aws" && key_id_header.start_with?("aws"))
+    def try_decrypt?(message_key_id)
+      message_key_id == key_id_header
     end
   end
 end
