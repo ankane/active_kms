@@ -18,10 +18,10 @@ module ActiveKms
       client.decrypt(key_id: key_id, ciphertext_blob: encrypted_data_key).plaintext
     end
 
-    # key is stored in ciphertext so don't need to store reference
-    # reference could be useful for multiple AWS clients
-    # so consider an option in the future
-    def key_id_header
+    # the same key can be referenced multiple ways
+    # (key ID, key ARN, alias name, alias ARN)
+    # but not a great way to account for this
+    def prefix
       "aws"
     end
   end

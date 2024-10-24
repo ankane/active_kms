@@ -46,6 +46,8 @@ And add to `config/application.rb`:
 config.active_record.encryption.key_provider = ActiveKms::AwsKeyProvider.new(key_id: ENV["KMS_KEY_ID"])
 ```
 
+**Note:** While the same KMS key can be referenced multiple ways (key ID, key ARN, alias name, or alias ARN), switching between ways without key rotation will cause decryption to fail.
+
 ### Google Cloud KMS
 
 Add this line to your application’s Gemfile:
