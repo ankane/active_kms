@@ -1,6 +1,5 @@
 ## 0.2.0 (unreleased)
 
-- Changed decryption to check key with AWS KMS
 - Dropped support for Ruby < 3.1
 
 ## 0.1.1 (2023-12-01)
