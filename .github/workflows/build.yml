@@ -21,7 +21,7 @@ jobs:
       KEY_ID: my-key
       VAULT_ADDR: http://127.0.0.1:8200
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
