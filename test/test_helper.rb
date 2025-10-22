@@ -1,7 +1,6 @@
 require "bundler/setup"
 Bundler.require(:default)
 require "minitest/autorun"
-require "minitest/pride"
 require "active_record"
 
 ENV["VAULT_ADDR"] ||= "http://127.0.0.1:8200"
