@@ -8,12 +8,6 @@ gem "activerecord", "~> 8.1.0"
 gem "aws-sdk-kms"
 gem "vault"
 gem "nokogiri" # for aws-sdk
-
-platform :ruby do
-  gem "sqlite3"
-  gem "google-cloud-kms"
-end
-
-platform :jruby do
-  gem "sqlite3-ffi"
-end
+gem "sqlite3", platform: :ruby
+gem "google-cloud-kms", platform: :ruby
+gem "sqlite3-ffi", platform: :jruby
