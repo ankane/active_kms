@@ -11,3 +11,6 @@ gem "nokogiri" # for aws-sdk
 gem "sqlite3", platform: :ruby
 gem "google-cloud-kms", platform: :ruby
 gem "sqlite3-ffi", platform: :jruby
+
+# https://github.com/hashicorp/vault-ruby/issues/366
+gem "openssl", "< 4"
